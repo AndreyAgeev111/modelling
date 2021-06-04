@@ -1,6 +1,8 @@
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+import array
+
 
 A = 33.1
 Q = 1.6 * math.pow(10, -19)
@@ -20,15 +22,21 @@ def currentDensity(temperature, voltage):
            (np.exp(Q * voltage / N / K / temperature) - 1)
 
 
-def upgradeCurrentDensity(temperature, voltage):
-    return saturationCurrentDensity(temperature) * \
-           (np.exp(Q *
-                   (voltage - currentDensity(temperature, voltage) * R) / N / K / temperature) - 1)
+def upgradeSomeCurrent(temperature, voltage):
+    startCurrent = 0
+    currentValues = array.array('f', [])
+
+    for v in range(len(voltage)):
+        current = saturationCurrentDensity(temperature) * (np.exp(
+            Q * (voltage[v] - startCurrent * R) / N / K / temperature) - 1)
+        currentValues.append(current)
+        startCurrent = current
+    return np.array(currentValues)
 
 
 def showUpgradeCurrentDensity():
     v = np.linspace(0, 0.6, 100)
-    plt.plot(v, upgradeCurrentDensity(298, v))
+    plt.plot(v, upgradeSomeCurrent(298, v))
     plt.ylim(0, 8 * math.pow(10, -5))
 
     plt.show()
@@ -36,11 +44,8 @@ def showUpgradeCurrentDensity():
 
 def testCurrentDensity():
     testV = np.linspace(0, 0.6, 7)
-    for vol in testV:
-        print('Ток прямого смещения и ток прямого смещения с поправкой:',
-              " ".join([str(currentDensity(298, vol)), str(upgradeCurrentDensity(298, vol))]))
     plt.plot(testV, currentDensity(298, testV))
-    plt.plot(testV, upgradeCurrentDensity(298, testV))
+    plt.plot(testV, upgradeSomeCurrent(298, testV))
     plt.ylim(0, 8 * math.pow(10, -5))
 
     plt.show()
