@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import array
 
-
 A = 33.1
 Q = 1.6 * math.pow(10, -19)
 POTENTIAL = 0.86
@@ -31,14 +30,18 @@ def upgradeSomeCurrent(temperature, voltage):
             Q * (voltage[v] - startCurrent * R) / N / K / temperature) - 1)
         currentValues.append(current)
         startCurrent = current
+
     return np.array(currentValues)
+
+
+def sortedUpgradeCurrentDensity(temperature, voltage):
+    return sorted(upgradeSomeCurrent(temperature, voltage))
 
 
 def showUpgradeCurrentDensity():
     v = np.linspace(0, 0.6, 100)
-    plt.plot(v, upgradeSomeCurrent(298, v))
+    plt.plot(v, sortedUpgradeCurrentDensity(298, v))
     plt.ylim(0, 8 * math.pow(10, -5))
-
     plt.show()
 
 
