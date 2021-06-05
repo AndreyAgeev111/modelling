@@ -39,7 +39,7 @@ def sortedUpgradeCurrentDensity(temperature, voltage):
 
 
 def showUpgradeCurrentDensity():
-    v = np.linspace(0, 0.6, 100)
+    v = np.linspace(0, 0.6, 1000)
     plt.plot(v, sortedUpgradeCurrentDensity(298, v))
     plt.ylim(0, 8 * math.pow(10, -5))
     plt.show()
