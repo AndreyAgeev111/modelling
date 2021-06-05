@@ -31,7 +31,7 @@ def upgradeSomeCurrent(temperature, voltage):
         currentValues.append(current)
         startCurrent = current
 
-    return np.array(currentValues)
+    return currentValues
 
 
 def sortedUpgradeCurrentDensity(temperature, voltage):
