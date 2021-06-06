@@ -1,5 +1,4 @@
-import current_modelling
-import capacity_modelling
+from src import capacity_modelling, current_modelling
 
 if __name__ == "__main__":
     # ВАХ диода Шоттки
