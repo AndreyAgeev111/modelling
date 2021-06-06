@@ -14,9 +14,12 @@ def capacity(temperature, voltage):
 
 
 def showCapacity():
-    v = np.linspace(-30, 0, 100)
+    v = np.linspace(-30, 0, 1000)
     plt.plot(v, capacity(298, v))
+
     plt.xlim(-30, 0.71)
+    plt.xlabel("Напряжение, В")
+    plt.ylabel("Емкость обдненного слоя, F^-2 см^4")
 
     plt.show()
 

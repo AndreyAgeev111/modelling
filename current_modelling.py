@@ -35,20 +35,40 @@ def upgradeSomeCurrent(temperature, voltage):
 
 
 def sortedUpgradeCurrentDensity(temperature, voltage):
-    return sorted(upgradeSomeCurrent(temperature, voltage))
+    currentValues = upgradeSomeCurrent(temperature, voltage)
+    lengthOfArray = len(currentValues)
+    for current in range(lengthOfArray - 1):
+        if currentValues[current] > currentValues[(current + 1)]:
+            continue
+        else:
+            currentValues[current] = (currentValues[current - 1] + currentValues[current + 1]) / 2
+
+    if currentValues[lengthOfArray - 1] < currentValues[lengthOfArray - 2]:
+        currentValues[lengthOfArray - 1] = 2 * currentValues[lengthOfArray - 2] - \
+                                           currentValues[lengthOfArray - 3]
+    currentValues[0] = 0
+    return currentValues
 
 
 def showUpgradeCurrentDensity():
-    v = np.linspace(0, 0.6, 1000)
-    plt.plot(v, sortedUpgradeCurrentDensity(298, v))
-    plt.ylim(0, 8 * math.pow(10, -5))
+    v = np.linspace(0, 0.6, 10000)
+
+    plt.plot(v, sortedUpgradeCurrentDensity(298, v), label='T = 298 K')
+    plt.plot(v, sortedUpgradeCurrentDensity(323, v), label='T = 323 K')
+    plt.plot(v, sortedUpgradeCurrentDensity(373, v), label='T = 373 K')
+    plt.plot(v, sortedUpgradeCurrentDensity(423, v), label='T = 423 K')
+
+    plt.ylim(0, 8 * math.pow(10, 0))
+    plt.xlabel("Напряжение, В")
+    plt.ylabel("Плотность тока J, А / см^2")
+    plt.legend()
     plt.show()
 
 
-def testCurrentDensity():
-    testV = np.linspace(0, 0.6, 7)
-    plt.plot(testV, currentDensity(298, testV))
-    plt.plot(testV, upgradeSomeCurrent(298, testV))
-    plt.ylim(0, 8 * math.pow(10, -5))
+def someTestValues(temperature):
+    v = np.linspace(0, 0.6, 6000)
+    currentValues = upgradeSomeCurrent(temperature, v)
 
-    plt.show()
+    # точки V = 0, 0.1, 0.2 ... 0.6
+    for numb in range(6):
+        print("Значение плотности тока для температуры " + str(temperature) + "К: " + str(currentValues[numb * 1000]))
