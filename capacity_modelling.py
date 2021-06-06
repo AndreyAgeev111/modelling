@@ -19,7 +19,7 @@ def showCapacity():
 
     plt.xlim(-30, 0.71)
     plt.xlabel("Напряжение, В")
-    plt.ylabel("Емкость обдненного слоя, F^-2 см^4")
+    plt.ylabel("Емкость обедненного слоя, F^-2 см^4")
 
     plt.show()
 
