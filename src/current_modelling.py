@@ -67,8 +67,9 @@ def showUpgradeCurrentDensity():
 
 def someTestValues(temperature):
     v = np.linspace(0, 0.6, 6000)
-    currentValues = upgradeSomeCurrent(temperature, v)
+    currentValues = sortedUpgradeCurrentDensity(temperature, v)
 
     # точки V = 0, 0.1, 0.2 ... 0.6
     for numb in range(6):
         print("Значение плотности тока для температуры " + str(temperature) + "К: " + str(currentValues[numb * 1000]))
+    print("Значение плотности тока для температуры " + str(temperature) + "К: " + str(currentValues[5999]))
