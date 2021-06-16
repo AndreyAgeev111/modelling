@@ -17,19 +17,6 @@ def saturation_current_density(temperature):
         -Q * POTENTIAL / temperature / K)
 
 
-def upgrade_some_current(temperature, voltage):
-    startCurrent = 0
-    currentValues = array.array('f', [])
-
-    for v in range(len(voltage)):
-        current = saturation_current_density(temperature) * (np.exp(
-            Q * (voltage[v] - startCurrent * R) / N / K / temperature) - 1)
-        currentValues.append(current)
-        startCurrent = current
-
-    return currentValues
-
-
 def get_oscillation_index(temperature, voltage):
     currentValues = current_density(temperature, voltage)
     for current in range(len(currentValues) - 1):
