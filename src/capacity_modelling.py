@@ -13,7 +13,7 @@ def capacity(temperature, voltage):
     return 2 * (VB - voltage - K * temperature / Q) / (Q * E * ND)
 
 
-def showCapacity():
+def show_capacity():
     v = np.linspace(-30, 0, 1000)
     plt.plot(v, capacity(298, v))
 
@@ -24,6 +24,6 @@ def showCapacity():
     plt.show()
 
 
-def testCapacity():
+def test_capacity():
     print('Значения обратного квадрата емкости в точках  V = -30 В и V = 0.71 В:',
           ' '.join([str(capacity(298, -30)), str(capacity(298, 0.71))]))

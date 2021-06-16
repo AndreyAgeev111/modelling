@@ -6,5 +6,5 @@ if __name__ == "__main__":
     current_modelling.some_test_values(298)
 
     # Зависимость квадрата 1/С к напряжению диода Шоттки
-    capacity_modelling.showCapacity()
-    capacity_modelling.testCapacity()
+    capacity_modelling.show_capacity()
+    capacity_modelling.test_capacity()
