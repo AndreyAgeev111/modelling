@@ -58,7 +58,6 @@ def show_upgrade_current_density():
     ax.plot(v, sort_current_density(373, v), label='T = 373 K')
     ax.plot(v, sort_current_density(423, v), label='T = 423 K')
 
-    # plt.ylim(0, 3 * math.pow(10, 0))
     ax.set_yscale('log')
     plt.xlabel("Напряжение, В")
     plt.ylabel("Плотность тока J, А / см^2")
