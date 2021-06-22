@@ -51,12 +51,15 @@ def sort_current_density(temperature, voltage):
 def show_upgrade_current_density():
     v = np.linspace(0, 0.6, 10000)
 
-    plt.plot(v, sort_current_density(298, v), label='T = 298 K')
-    plt.plot(v, sort_current_density(323, v), label='T = 323 K')
-    plt.plot(v, sort_current_density(373, v), label='T = 373 K')
-    plt.plot(v, sort_current_density(423, v), label='T = 423 K')
+    fig = plt.figure(figsize=(7, 4))
+    ax = fig.add_subplot()
+    ax.plot(v, sort_current_density(298, v), label='T = 298 K')
+    ax.plot(v, sort_current_density(323, v), label='T = 323 K')
+    ax.plot(v, sort_current_density(373, v), label='T = 373 K')
+    ax.plot(v, sort_current_density(423, v), label='T = 423 K')
 
-    plt.ylim(0, 3 * math.pow(10, 0))
+    # plt.ylim(0, 3 * math.pow(10, 0))
+    ax.set_yscale('log')
     plt.xlabel("Напряжение, В")
     plt.ylabel("Плотность тока J, А / см^2")
     plt.legend()
