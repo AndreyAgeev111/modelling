@@ -52,10 +52,10 @@ def show_upgrade_current_density():
 
     fig = plt.figure(figsize=(7, 4))
     ax = fig.add_subplot()
-    ax.plot(v, sort_current_density(1.27, 1.05, v), label='TBH = 1.27 V')
-    ax.plot(v, sort_current_density(1.54, 1.04, v), label='TBH = 1.54 V')
-    ax.plot(v, sort_current_density(1.58, 1.03, v), label='TBH = 1.58 V')
-    ax.plot(v, sort_current_density(1.71, 1.09, v), label='TBH = 1.71 V')
+    ax.plot(v, sort_current_density(1.27, 1.05, v), label='TBH = 1.27 V, Pd')
+    ax.plot(v, sort_current_density(1.54, 1.04, v), label='TBH = 1.54 V, Ni')
+    ax.plot(v, sort_current_density(1.58, 1.03, v), label='TBH = 1.58 V, Pt')
+    ax.plot(v, sort_current_density(1.71, 1.09, v), label='TBH = 1.71 V, Au')
 
     ax.set_yscale('log')
     plt.xlabel("Напряжение, В")
