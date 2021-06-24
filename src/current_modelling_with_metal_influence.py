@@ -20,7 +20,6 @@ def get_oscillation_index(temperature_barrier_height, n, voltage):
     currentValues = current_density(temperature_barrier_height, n, voltage)
     for current in range(len(currentValues) - 1):
         if currentValues[current] > currentValues[current + 1]:
-            print(current)
             return current
 
 
@@ -49,7 +48,7 @@ def sort_current_density(temperature_barrier_height, n, voltage):
 
 
 def show_upgrade_current_density():
-    v = np.linspace(0, 2, 10000)
+    v = np.linspace(-3, 2, 10000)
 
     fig = plt.figure(figsize=(7, 4))
     ax = fig.add_subplot()
