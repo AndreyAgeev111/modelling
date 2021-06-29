@@ -11,4 +11,4 @@ _____
 ![Alt-текст](https://github.com/AndreyAgeev111/modelling/blob/master/res/data.png "Данные")
 _____
 ## Значение плотности тока для различных материалов на контакте при температуре 300 К:
-![Alt-текст](https://github.com/AndreyAgeev111/modelling/blob/master/res/VAС_with_metal_1.png "ВАХ с металлами")
+![Alt-текст](https://github.com/AndreyAgeev111/modelling/blob/master/res/VAC_with_metal_1.png "ВАХ с металлами")
