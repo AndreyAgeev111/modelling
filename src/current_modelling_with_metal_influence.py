@@ -51,10 +51,10 @@ def show_upgrade_current_density():
 
     fig = plt.figure(figsize=(7, 4))
     ax = fig.add_subplot()
-    ax.plot(v, sort_current_density(1.27, 1.05, v), label='TBH = 1.27 V, Pd', color='b')
-    ax.plot(v, sort_current_density(1.54, 1.04, v), label='TBH = 1.54 V, Ni', color='k')
-    ax.plot(v, sort_current_density(1.58, 1.03, v), label='TBH = 1.58 V, Pt', color='r')
-    ax.plot(v, sort_current_density(1.71, 1.09, v), label='TBH = 1.71 V, Au', color='g')
+    ax.plot(v, sort_current_density(1.27, 1.05, v), label='TBH = 1.27 V, n = 1.05, Pd ', color='b')
+    ax.plot(v, sort_current_density(1.54, 1.04, v), label='TBH = 1.54 V, n = 1.04, Ni', color='k')
+    ax.plot(v, sort_current_density(1.58, 1.03, v), label='TBH = 1.58 V, n = 1.03, Pt', color='r')
+    ax.plot(v, sort_current_density(1.71, 1.09, v), label='TBH = 1.71 V, n = 1.09, Au', color='g')
 
     ax.set_yscale('log')
     ax.set_ylim([math.pow(10, -8), math.pow(10, 0)])
