@@ -43,7 +43,6 @@ def sort_current_density(temperature_barrier_height, n, voltage):
 
     for current in range(oscillationIndex, len(currentValues)):
         currentValues[current] = currentValues[current - 1] + delta
-
     return currentValues
 
 
@@ -52,12 +51,13 @@ def show_upgrade_current_density():
 
     fig = plt.figure(figsize=(7, 4))
     ax = fig.add_subplot()
-    ax.plot(v, sort_current_density(1.27, 1.05, v), label='TBH = 1.27 V, Pd')
-    ax.plot(v, sort_current_density(1.54, 1.04, v), label='TBH = 1.54 V, Ni')
-    ax.plot(v, sort_current_density(1.58, 1.03, v), label='TBH = 1.58 V, Pt')
-    ax.plot(v, sort_current_density(1.71, 1.09, v), label='TBH = 1.71 V, Au')
+    ax.plot(v, sort_current_density(1.27, 1.05, v), label='TBH = 1.27 V, Pd', color='b')
+    ax.plot(v, sort_current_density(1.54, 1.04, v), label='TBH = 1.54 V, Ni', color='k')
+    ax.plot(v, sort_current_density(1.58, 1.03, v), label='TBH = 1.58 V, Pt', color='r')
+    ax.plot(v, sort_current_density(1.71, 1.09, v), label='TBH = 1.71 V, Au', color='g')
 
     ax.set_yscale('log')
+    ax.set_ylim([math.pow(10, -8), math.pow(10, 0)])
     plt.xlabel("Напряжение, В")
     plt.ylabel("Плотность тока J, А / см^2")
     plt.legend()
