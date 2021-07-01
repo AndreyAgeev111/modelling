@@ -12,3 +12,6 @@ _____
 _____
 ## Значение плотности тока для различных материалов на контакте при температуре 300 К:
 ![Alt-текст](https://github.com/AndreyAgeev111/modelling/blob/master/res/VAC_with_metal_1.png "ВАХ с металлами")
+_____
+## График зависимости емкости обедненного слоя для различных материалов на контакте:
+![Alt-текст](https://github.com/AndreyAgeev111/modelling/blob/master/res/capasity_with_metal_1.png "Емкость с металлами")
