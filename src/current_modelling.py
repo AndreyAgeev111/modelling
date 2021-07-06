@@ -18,34 +18,34 @@ def saturation_current_density(temperature):
 
 
 def get_oscillation_index(temperature, voltage):
-    currentValues = current_density(temperature, voltage)
-    for current in range(len(currentValues) - 1):
-        if currentValues[current] > currentValues[current + 1]:
+    current_values = current_density(temperature, voltage)
+    for current in range(len(current_values) - 1):
+        if current_values[current] > current_values[current + 1]:
             return current
 
 
 def current_density(temperature, voltage):
-    startCurrent = 0
-    currentValues = array.array('f', [])
+    start_current = 0
+    current_values = array.array('f', [])
 
     for v in range(len(voltage)):
         current = saturation_current_density(temperature) * (np.exp(
-            Q * (voltage[v] - startCurrent * R * S) / N / K / temperature) - 1)
-        currentValues.append(current)
-        startCurrent = current
+            Q * (voltage[v] - start_current * R * S) / N / K / temperature) - 1)
+        current_values.append(current)
+        start_current = current
 
-    return currentValues
+    return current_values
 
 
 def sort_current_density(temperature, voltage):
-    oscillationIndex = get_oscillation_index(temperature, voltage)
-    currentValues = current_density(temperature, voltage)
-    delta = currentValues[oscillationIndex] - currentValues[oscillationIndex - 1]
+    oscillation_index = get_oscillation_index(temperature, voltage)
+    current_values = current_density(temperature, voltage)
+    delta = current_values[oscillation_index] - current_values[oscillation_index - 1]
 
-    for current in range(oscillationIndex, len(currentValues)):
-        currentValues[current] = currentValues[current - 1] + delta
+    for current in range(oscillation_index, len(current_values)):
+        current_values[current] = current_values[current - 1] + delta
 
-    return currentValues
+    return current_values
 
 
 def show_upgrade_current_density():
@@ -67,8 +67,8 @@ def show_upgrade_current_density():
 
 def some_test_values(temperature):
     v = np.linspace(0, 0.6, 6000)
-    currentValues = sort_current_density(temperature, v)
+    current_values = sort_current_density(temperature, v)
     # точки V = 0, 0.1, 0.2 ... 0.6
     for numb in range(6):
-        print("Значение плотности тока для температуры " + str(temperature) + "К: " + str(currentValues[numb * 1000]))
-    print("Значение плотности тока для температуры " + str(temperature) + "К: " + str(currentValues[5999]))
+        print("Значение плотности тока для температуры " + str(temperature) + "К: " + str(current_values[numb * 1000]))
+    print("Значение плотности тока для температуры " + str(temperature) + "К: " + str(current_values[5999]))

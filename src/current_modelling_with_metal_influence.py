@@ -17,33 +17,33 @@ def saturation_current_density(temperature_barrier_height):
 
 
 def get_oscillation_index(temperature_barrier_height, n, voltage):
-    currentValues = current_density(temperature_barrier_height, n, voltage)
-    for current in range(len(currentValues) - 1):
-        if currentValues[current] > currentValues[current + 1]:
+    current_values = current_density(temperature_barrier_height, n, voltage)
+    for current in range(len(current_values) - 1):
+        if current_values[current] > current_values[current + 1]:
             return current
 
 
 def current_density(temperature_barrier_height, n, voltage):
-    startCurrent = 0
-    currentValues = array.array('f', [])
+    start_current = 0
+    current_values = array.array('f', [])
 
     for v in range(len(voltage)):
         current = saturation_current_density(temperature_barrier_height) * (np.exp(
-            Q * (voltage[v] - startCurrent * R * S) / n / K / T) - 1)
-        currentValues.append(current)
-        startCurrent = current
+            Q * (voltage[v] - start_current * R * S) / n / K / T) - 1)
+        current_values.append(current)
+        start_current = current
 
-    return currentValues
+    return current_values
 
 
 def sort_current_density(temperature_barrier_height, n, voltage):
-    oscillationIndex = get_oscillation_index(temperature_barrier_height, n, voltage)
-    currentValues = current_density(temperature_barrier_height, n, voltage)
-    delta = currentValues[oscillationIndex] - currentValues[oscillationIndex - 1]
+    oscillation_index = get_oscillation_index(temperature_barrier_height, n, voltage)
+    current_values = current_density(temperature_barrier_height, n, voltage)
+    delta = current_values[oscillation_index] - current_values[oscillation_index - 1]
 
-    for current in range(oscillationIndex, len(currentValues)):
-        currentValues[current] = currentValues[current - 1] + delta
-    return currentValues
+    for current in range(oscillation_index, len(current_values)):
+        current_values[current] = current_values[current - 1] + delta
+    return current_values
 
 
 def show_upgrade_current_density():
