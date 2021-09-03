@@ -69,18 +69,18 @@ def show_upgrade_current_density():
     fig = plt.figure(figsize=(7, 5))
     ax = fig.add_subplot()
 
-    with open("../csv/Ru.csv") as f_obj:
+    with open("../csv/Ti.csv") as f_obj:
         vol = csv_dict_reader_voltage(f_obj)
-    with open("../csv/Ru.csv") as f_obj:
+    with open("../csv/Ti.csv") as f_obj:
         current = csv_dict_reader_current(f_obj)
 
-    ax.plot(v, sort_current_density(1.27, 1.02, v, 300), label='T = 300 K')
-    ax.plot(v, sort_current_density(1.27, 1.02, v, 323), label='T = 323 K')
-    ax.plot(v, sort_current_density(1.27, 1.02, v, 343), label='T = 343 K')
-    ax.plot(v, sort_current_density(1.27, 1.02, v, 363), label='T = 363 K')
-    ax.plot(v, sort_current_density(1.27, 1.02, v, 383), label='T = 383 K')
-    ax.plot(v, sort_current_density(1.27, 1.02, v, 403), label='T = 403 K')
-    ax.plot(v, sort_current_density(1.27, 1.02, v, 423), label='T = 423 K')
+    ax.plot(v, sort_current_density(0.9, 1.07, v, 300), label='T = 300 K')
+    ax.plot(v, sort_current_density(0.9, 1.07, v, 323), label='T = 323 K')
+    ax.plot(v, sort_current_density(0.9, 1.07, v, 343), label='T = 343 K')
+    ax.plot(v, sort_current_density(0.9, 1.07, v, 363), label='T = 363 K')
+    ax.plot(v, sort_current_density(0.9, 1.07, v, 383), label='T = 383 K')
+    ax.plot(v, sort_current_density(0.9, 1.07, v, 403), label='T = 403 K')
+    ax.plot(v, sort_current_density(0.9, 1.07, v, 423), label='T = 423 K')
     ax.plot(vol, current, label='Данные из статьи', linewidth='5')
 
     ax.set_yscale('log')
@@ -88,7 +88,7 @@ def show_upgrade_current_density():
     for label in (ax.get_xticklabels() + ax.get_yticklabels()):
         label.set_fontsize(11)
         label.set_fontweight('bold')
-    ax.set_title('Ru, TBH = 1.27 V, n = 1.02', fontsize=14, fontweight='heavy', name='Arial')
+    ax.set_title('Cu/Ti/Fe, TBH = 0.9 V, n = 1.07', fontsize=14, fontweight='heavy', name='Arial')
     # ax.set_ylim([0, math.pow(10, 2)])
     # ax.set_xlim([0, 3])
     plt.xlabel("Напряжение, В", fontsize=14, fontweight='heavy', name='Arial')
