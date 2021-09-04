@@ -46,22 +46,13 @@ def sort_current_density(temperature_barrier_height, n, voltage, temperature):
     return current_values
 
 
-def csv_dict_reader_voltage(file_obj):
+def csv_dict_reader(file_obj, column):
     reader = csv.DictReader(file_obj, delimiter=';')
     vol = []
     for line in reader:
-        num = float(line["V"])
+        num = float(line[column])
         vol.append(num)
     return vol
-
-
-def csv_dict_reader_current(file_obj):
-    reader = csv.DictReader(file_obj, delimiter=';')
-    current = []
-    for line in reader:
-        num = float(line["I"])
-        current.append(num)
-    return current
 
 
 def show_upgrade_current_density():
@@ -70,9 +61,9 @@ def show_upgrade_current_density():
     ax = fig.add_subplot()
 
     with open("../csv/Ti.csv") as f_obj:
-        vol = csv_dict_reader_voltage(f_obj)
+        vol = csv_dict_reader(f_obj, "V")
     with open("../csv/Ti.csv") as f_obj:
-        current = csv_dict_reader_current(f_obj)
+        current = csv_dict_reader(f_obj, "I")
 
     ax.plot(v, sort_current_density(0.9, 1.07, v, 300), label='T = 300 K')
     ax.plot(v, sort_current_density(0.9, 1.07, v, 323), label='T = 323 K')
