@@ -55,17 +55,34 @@ def csv_dict_reader(file_obj, column):
     return vol
 
 
+def csv_dict_writer(file_obj):
+    v = np.linspace(0, 3, 1000000)
+    current_values = sort_current_density(1.22, 1.05, v, 300)
+    oscillation_index = get_oscillation_index(1.22, 1.05, v, 300)
+    current_values = current_values[:oscillation_index]
+    v = v[:oscillation_index]
+
+    names = ["V", "I"]
+    file_writer = csv.DictWriter(file_obj, delimiter=",",
+                                 lineterminator="\r", fieldnames=names)
+    file_writer.writeheader()
+    for i in range(oscillation_index):
+        file_writer.writerow({"V": str(v[i]), "I": str(current_values[i])})
+
+
 def show_upgrade_current_density():
     v = np.linspace(0, 3, 1000000)
     fig = plt.figure(figsize=(7, 5))
     ax = fig.add_subplot()
 
-    with open("../csv/Ti.csv") as f_obj:
+    with open("../csv/PD.csv") as f_obj:
         vol = csv_dict_reader(f_obj, "V")
-    with open("../csv/Ti.csv") as f_obj:
+    with open("../csv/PD.csv") as f_obj:
         current = csv_dict_reader(f_obj, "I")
+    with open("../csv/Pd_model.csv", "w") as f_obj:
+        csv_dict_writer(f_obj)
 
-    ax.plot(v, sort_current_density(0.83, 1.15, v, 300), label='T = 300 K')
+    ax.plot(v, sort_current_density(1.22, 1.05, v, 300), label='T = 300 K')
     ax.plot(vol, current, label='Данные из статьи')
 
     ax.set_yscale('log')
@@ -73,9 +90,7 @@ def show_upgrade_current_density():
     for label in (ax.get_xticklabels() + ax.get_yticklabels()):
         label.set_fontsize(11)
         label.set_fontweight('bold')
-    ax.set_title('Ti, TBH = 0.83 V, n = 1.15', fontsize=14, fontweight='heavy', name='Arial')
-    # ax.set_ylim([0, math.pow(10, 2)])
-    # ax.set_xlim([0, 3])
+    ax.set_title('Pd, TBH = 1.22 V, n = 1.05', fontsize=14, fontweight='heavy', name='Arial')
     plt.xlabel("Напряжение, В", fontsize=14, fontweight='heavy', name='Arial')
     plt.ylabel("Плотность тока J, А / см^2", fontsize=14, fontweight='heavy', name='Arial')
     plt.legend(loc='lower right', fontsize=14, title_fontsize=13)
