@@ -42,7 +42,7 @@ def sort_current_density(temperature_barrier_height, n, voltage, temperature):
     delta = current_values[oscillation_index] - current_values[oscillation_index - 1]
 
     for current in range(oscillation_index, len(current_values)):
-        current_values[current] = current_values[current - 1] + delta
+        current_values[current] = current_values[current - 1] + delta / 4.5
     return current_values
 
 
@@ -55,8 +55,9 @@ def csv_dict_reader(file_obj, column):
     return vol
 
 
+# Запись данных для последующего анализа для аппроксимации
 def csv_dict_writer(file_obj):
-    v = np.linspace(0, 3, 1000000)
+    v = np.linspace(0, 3, 300000)
     current_values = sort_current_density(1.22, 1.05, v, 300)
     oscillation_index = get_oscillation_index(1.22, 1.05, v, 300)
     current_values = current_values[:oscillation_index]
@@ -70,14 +71,39 @@ def csv_dict_writer(file_obj):
         file_writer.writerow({"V": str(v[i]), "I": str(current_values[i])})
 
 
+def calculate_STD(file_obj, temperature_barrier_height, n):
+    theory_data_voltage = np.linspace(0, 3, 1000000)
+    theory_data_current = sort_current_density(temperature_barrier_height, n, theory_data_voltage, 300)
+
+    with open(file_obj) as f_obj:
+        exp_data_voltage = csv_dict_reader(f_obj, "V")
+    with open(file_obj) as f_obj:
+        exp_data_current = csv_dict_reader(f_obj, "I")
+
+    square_difference = []
+    for i in range(len(exp_data_voltage)):
+        square_difference.append((exp_data_current[i] - np.interp(exp_data_voltage[i], theory_data_voltage,
+                                                                  theory_data_current)) ** 2)
+
+    STD = (sum(square_difference) / len(square_difference)) ** 0.5
+    print("STD = " + str(STD))
+
+    plt.plot(exp_data_voltage, square_difference)
+    plt.ylabel('square difference')
+    plt.xlabel('Applied voltage (V)')
+    plt.show()
+
+    return 0
+
+
 def show_upgrade_current_density():
     v = np.linspace(0, 3, 1000000)
     fig = plt.figure(figsize=(7, 5))
     ax = fig.add_subplot()
 
-    with open("../csv/PD.csv") as f_obj:
+    with open("../csv/Pd.csv") as f_obj:
         vol = csv_dict_reader(f_obj, "V")
-    with open("../csv/PD.csv") as f_obj:
+    with open("../csv/Pd.csv") as f_obj:
         current = csv_dict_reader(f_obj, "I")
     with open("../csv/Pd_model.csv", "w") as f_obj:
         csv_dict_writer(f_obj)
