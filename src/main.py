@@ -17,5 +17,4 @@ if __name__ == "__main__":
     capacity_modelling_with_metal_influence.show_capacity()
 
     # Погрешность в методе приближения
-
     current_modelling_with_metal_influence.calculate_STD("../csv/Pd.csv", 1.22, 1.05)
